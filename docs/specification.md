@@ -50,7 +50,8 @@ The union type is a tool to deal with data that can assume values from different
 
 - ``~n``: the `n`-th element of an array (a literal natural number)
 - `` `n``: the `n`-th field of a compound or variant in a union
-- ``@n``: the label `n` in the heap
+- ``@ptr``: a pointer to a position in the heap
+- ``#label``: a label in the program
 - ``'c'``: a single character
 - ``"string"``: a utf-8 string
 - ``[0-9]+``:  a base 10 number literal, must be suffixed with it's kind `b`(`byte`), `b2`, `b4`, `b8`, `i`, `i2`, `i4`, `i8`
@@ -60,4 +61,138 @@ The union type is a tool to deal with data that can assume values from different
 
 ## Instruction Set
 
-- `push T ...v` pushes the values to the stack with the given type
+### ``mov @ptr ...``
+
+Moves the expression to `@ptr` in the heap
+
+### ``push ...``
+
+Pushes the expression to the stack
+
+### ``push `n ...``
+
+Pushes the field `` `n`` of the expression to the stack
+
+### ``dump``
+
+Dumps the top of the stack
+
+### ``pop @ptr``
+
+Pops the top of the stack to the position `@ptr` in the heap
+
+### ``pop `n @ptr``
+
+Pops just the field `` `n`` to `@ptr` in the heap
+
+### `dup`
+
+Duplicates the top of the stack
+
+### `dups`
+
+Duplicates the semitop of the stack
+
+### `swap`
+
+Swaps the two tops of the stack
+
+### `add`
+
+Adds the two values on the top of the stack and pushes the result to the stack
+
+### `sub`
+
+Subtract the two values on the top of the stack and pushes the result to the stack
+
+### `mul`
+
+Multiplies the two values on the top of the stack and pushes the result to the stack
+
+### `div`
+
+Divides the semitop by the top of the stack and pushes the result to the stack
+
+### `mod`
+
+Calculates semitop modulus the top of the stack and pushes the result to the stack
+
+### `pow`
+
+Calcultes semitop to the top-th power
+
+### `bwand`
+
+Bitwise and of the two top values
+
+### `bwor`
+
+Bitwise or of the two top values
+
+### `bwxor`
+
+Bitwise xor of the two top values
+
+### `bwnot`
+
+Bitwise negation of the top value
+
+### `eq`
+
+Compares if the two top values are equals
+
+### `neq`
+
+Compares if the two top values are not equals
+
+### `gt`
+
+Compares if the semitop is greater than the top
+
+### `lt`
+
+Compares if the semitop is less than the top
+
+### `geq`
+
+Compares if the semitop is greater or equals to the top
+
+### `leq`
+
+Compares if the semitop is less ot equals to the top
+
+### `not`
+
+Inverts the top of the stack (true <-> false)
+
+### `and`
+
+Logical and of the two top values
+
+### `or`
+
+Logical or of the two top values
+
+### `jmp #label`
+
+Jumps to the given label in the current program
+
+### `jz #label`
+
+Jumps if the top of the stack is zeroed
+
+### `jnz #label`
+
+Jumps if the top of the stack isn't zeroed
+
+### `call`
+
+Calls the function pointer in the top of the stack creating a new nested execution environment
+
+### `exit`
+
+Finishes the current execution environment
+
+### `retn`
+
+Finishes the current execution environment and returns the top of the stack
