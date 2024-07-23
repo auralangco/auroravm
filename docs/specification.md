@@ -97,6 +97,14 @@ Duplicates the semitop of the stack
 
 Swaps the two tops of the stack
 
+### `join`
+
+Joins the two top values of the stack into a compound value
+
+### ``split `n``
+
+Splits the two top values of the stack into two compound values, fields from `n` and beyond remain at the top
+
 ### `add`
 
 Adds the two values on the top of the stack and pushes the result to the stack
@@ -187,7 +195,19 @@ Jumps if the top of the stack isn't zeroed
 
 ### `call`
 
-Calls the function pointer in the top of the stack creating a new nested execution environment
+Calls the function pointer at the top of the stack creating a new nested execution environment that will return a value
+
+### `callnr`
+
+Calls the function pointer at the top of the stack creating a new nested execution environment that won't return a value 
+
+### `natv "symbol"`
+
+Calls a native function implemented in Rust using the top of the stack as it's argument (returns a value)
+
+### `natvnr "symbol"`
+
+Calls a native function implemented in Rust using the top of the stack as it's argument (won't return a value)
 
 ### `exit`
 
