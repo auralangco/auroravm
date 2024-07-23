@@ -1,7 +1,7 @@
 use crate::data::Data;
 
 #[derive(Debug, Clone)]
-pub enum Opcode {
+pub enum Opcode<'a> {
     /// No operation, the program state still the same
     Nop,
     /// Finishes the execution of the current execution stack
@@ -14,4 +14,8 @@ pub enum Opcode {
     Pop,
     /// Sums the two values at the top of the stack
     Add,
+    /// Calls a native function with the given name
+    Natv(&'a str),
+    /// Calls a native function with the given name that won't return
+    Natvnr(&'a str),
 }
