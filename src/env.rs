@@ -75,7 +75,7 @@ impl<'a> Env<'a> {
                 Ok(Control::Next)
             },
             Opcode::Push(data) => {
-                self.stack.push(Data(*data));
+                self.stack.push(data.clone()); // TODO: Shall we clone?
                 self.program_counter += 1;
                 Ok(Control::Next)
             },

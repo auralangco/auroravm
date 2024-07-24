@@ -9,7 +9,7 @@ pub enum Opcode<'a> {
     /// Debug the current stack state
     Dbg,
     /// Pushes a value to the stack
-    Push(i64),
+    Push(Data),
     /// Pops a value from the stack
     Pop,
     /// Sums the two values at the top of the stack

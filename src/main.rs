@@ -8,7 +8,7 @@ mod env;
 mod ntv;
 
 fn main() {
-    let env = Env::new_no_retn(vec![Opcode::Push(60), Opcode::Push(9), Opcode::Add, Opcode::Natvnr("println"), Opcode::Retn], Default::default());
+    let env = Env::new_no_retn(vec![Opcode::Push(Data(60)), Opcode::Push(Data(9)), Opcode::Add, Opcode::Natvnr("println"), Opcode::Retn], Default::default());
 
     let _ = dbg!(env.run());
 }
