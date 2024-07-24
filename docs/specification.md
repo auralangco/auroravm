@@ -31,6 +31,7 @@ Everything in aurora is data. The stack stores the data with it's meaning (AKA t
 - `(...)`: a compound type
 - `|...|`: an union type
 - `[T]`: an array type
+- `fn`: a function
 
 ### Compound Type
 
@@ -52,6 +53,7 @@ The union type is a tool to deal with data that can assume values from different
 - `` `n``: the `n`-th field of a compound or variant in a union
 - ``@ptr``: a pointer to a position in the heap
 - ``#label``: a label in the program
+- ``$fn``: a pointer to a function
 - ``'c'``: a single character
 - ``"string"``: a utf-8 string
 - ``[0-9]+``:  a base 10 number literal, must be suffixed with it's kind `b`(`byte`), `b2`, `b4`, `b8`, `i`, `i2`, `i4`, `i8`
@@ -201,13 +203,17 @@ Calls the function pointer at the top of the stack creating a new nested executi
 
 Calls the function pointer at the top of the stack creating a new nested execution environment that won't return a value 
 
-### `natv "symbol"`
+### ``natv `symbol ``
 
 Calls a native function implemented in Rust using the top of the stack as it's argument (returns a value)
 
-### `natvnr "symbol"`
+### ``natvnr `symbol ``
 
 Calls a native function implemented in Rust using the top of the stack as it's argument (won't return a value)
+
+### `capt $fn`
+
+Produces a closure from the given function by capturing every `@var` in its body into its environment and push it to the top of the stack 
 
 ### `exit`
 
